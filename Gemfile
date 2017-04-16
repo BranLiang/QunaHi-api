@@ -18,6 +18,8 @@ gem 'active_model_serializers', '~> 0.10.0'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
+# Policy
+gem 'pundit'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -29,6 +31,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem "awesome_print"
 end
 
 group :development do
@@ -36,7 +39,6 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem "awesome_print"
 end
 
 group :test do
