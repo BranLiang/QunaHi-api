@@ -81,5 +81,3 @@ test:
 production:
   <<: *default
   database: qunahi_production
-  username: qunahi_api
-  password: <%= ENV['QUNAHI_API_DATABASE_PASSWORD'] %>
