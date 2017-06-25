@@ -11,12 +11,10 @@ class AccessTokensController < ApplicationController
       access_token = AccessToken.create(user: user, api_key: api_key)
       token = access_token.generate_token
 
-      hash = ActiveModel::SerializableResource.new(user).serializable_hash
-
-      render json: hash.merge({token: token}), status: :created
+      render json: user, status: :created, meta: { token: token }
     else
       render status: :unprocessable_entity,
-             json: { error: { message: 'Invalid credentials' } }
+             json: { error: { message: I18n.t('invalid_credentials') } }
     end
   end
 
