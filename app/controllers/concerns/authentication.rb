@@ -2,7 +2,7 @@ module Authentication
   include ActiveSupport::SecurityUtils
   extend ActiveSupport::Concern
 
-  AUTH_SCHEMA = 'QunaHi-Token'
+  AUTH_SCHEMA = 'Bearer'
 
   included do
     before_action :validate_auth_schema
