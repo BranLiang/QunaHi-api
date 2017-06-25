@@ -1,8 +1,8 @@
 class CreateImages < ActiveRecord::Migration[5.1]
   def change
     create_table :images do |t|
-      t.references :imageable, foreign_key: true
-      t.string :image
+      t.references :imageable, polymorphic: true, index: true
+      t.string :image, null: false
 
       t.timestamps
     end

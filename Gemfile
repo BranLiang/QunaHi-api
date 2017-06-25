@@ -27,6 +27,21 @@ gem 'pundit'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
 
+# state management
+gem 'aasm', '~> 4.12.0'
+
+# dont't bother with include and eager loading anymore
+gem 'goldiloader'
+
+# images storage solution
+gem 'carrierwave', '~> 1.0'
+
+# Gem for pargination
+gem 'kaminari', '~> 1.0.1'
+
+# foe nested product type
+gem 'awesome_nested_set', '~> 3.1.3'
+
 group :development, :test do
   gem 'pry-byebug'
   gem 'rspec-rails'

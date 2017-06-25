@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170328150216) do
+ActiveRecord::Schema.define(version: 20170625075423) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,11 +36,48 @@ ActiveRecord::Schema.define(version: 20170328150216) do
     t.index ["key"], name: "index_api_keys_on_key"
   end
 
+  create_table "event_types", force: :cascade do |t|
+    t.string "name"
+    t.integer "parent_id"
+    t.integer "lft"
+    t.integer "rgt"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parent_id"], name: "index_event_types_on_parent_id"
+  end
+
   create_table "events", force: :cascade do |t|
     t.string "name", null: false
     t.text "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "starts_at", null: false
+    t.datetime "ends_at", null: false
+    t.integer "coming_users_count", default: 0, null: false
+    t.integer "event_type_id", null: false
+    t.string "state", null: false
+    t.decimal "lat", precision: 10, scale: 6
+    t.decimal "lng", precision: 10, scale: 6
+    t.string "location"
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string "imageable_type"
+    t.bigint "imageable_id", null: false
+    t.string "image", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id"
+  end
+
+  create_table "user_event_attends", force: :cascade do |t|
+    t.string "state"
+    t.bigint "user_id"
+    t.bigint "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_user_event_attends_on_event_id"
+    t.index ["user_id"], name: "index_user_event_attends_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -66,4 +103,6 @@ ActiveRecord::Schema.define(version: 20170328150216) do
 
   add_foreign_key "access_tokens", "api_keys"
   add_foreign_key "access_tokens", "users"
+  add_foreign_key "user_event_attends", "events"
+  add_foreign_key "user_event_attends", "users"
 end
