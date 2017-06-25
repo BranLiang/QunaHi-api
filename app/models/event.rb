@@ -21,6 +21,7 @@ class Event < ApplicationRecord
   FINISHED_EVENTS_STAY_DAYS = 3
 
   belongs_to :product_type
+  belongs_to :user
   has_many :images, as: :imageable
   has_many :user_event_attends_may_coming, -> { where(state: [:coming, :may_come]) }, class_name: "UserEventAttend"
   has_many :may_coming_users, through: :user_event_attends_may_coming, class_name: "User", counter_cache: :coming_users_count

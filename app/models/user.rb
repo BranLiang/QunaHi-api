@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :interested_events, through: :user_event_attends, class_name: "Event"
   has_many :user_event_attends_may_go, -> { where(state: [:coming, :may_come]) }, class_name: "UserEventAttend"
   has_many :coming_events, through: :user_event_attends_may_go, class_name: "Event"
+  has_many :owned_events, class_name: "Event"
 
   before_validation :generate_confirmation_token, on: :create
   before_validation :downcase_email
