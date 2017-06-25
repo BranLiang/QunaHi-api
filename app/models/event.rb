@@ -11,6 +11,7 @@
 # t.decimal "lat", precision: 10, scale: 6
 # t.decimal "lng", precision: 10, scale: 6
 # t.string "location"
+# t.integer "user_id"
 
 class Event < ApplicationRecord
   include AASM
@@ -20,7 +21,7 @@ class Event < ApplicationRecord
   IN_COMING_EVENTS_DAYS_FORWARD = 14
   FINISHED_EVENTS_STAY_DAYS = 3
 
-  belongs_to :product_type
+  belongs_to :event_type
   belongs_to :user
   has_many :images, as: :imageable
   has_many :user_event_attends_may_coming, -> { where(state: [:coming, :may_come]) }, class_name: "UserEventAttend"
